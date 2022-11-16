@@ -41,7 +41,7 @@ contract Main {
         holdTokens[to] -= amount * times;
     }
 
-    // 呼叫者往自己的位址存入金額
+    // Action：呼叫者往自己的位址存入金額
     function Save(uint amount) public payable {
         add(msg.sender, amount);
     }

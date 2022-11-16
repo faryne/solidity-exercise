@@ -28,16 +28,16 @@ contract Main {
         return holdTokens[addr];
     }
 
-    // 在指定位址加上金額
+    // 購買代幣
     function add(address to, uint amount) public {
-        balances[to] += amount;
+        balances[to] -= amount;
         holdTokens[to] += amount * times;
     }
 
-    // 在指定位址減掉金額
+    // 賣掉代幣
     function minus(address to, uint amount) public {
         require(balances[to] > amount, unicode"餘額需大於付款數");
-        balances[to] -= amount;
+        balances[to] += amount;
         holdTokens[to] -= amount * times;
     }
 

@@ -13,7 +13,10 @@ contract Main {
         requester = msg.sender;
     }
 
-    function AddContent(string memory content) public {
+    receive() external payable {}
+    fallback() external payable {}
+
+    function AddContent(string memory content) public payable {
         messages[requester] = content;
     }
 

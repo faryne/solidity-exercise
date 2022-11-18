@@ -6,11 +6,9 @@
 * [Remix](https://remix.ethereum.org/)：可於線上使用的 Solidity IDE，集撰寫、測試及部署等功能於一身。
 * [Solidity官方文件](https://docs.soliditylang.org/en/v0.8.17/)：本合約使用 Solidity 0.8.17 標準撰寫，因此使用的參考文件以該版本為主。
 
-## 合約初覽
-
 本合約內容主要放置在 `main.sol` 檔案內。可以直接打開閱覽。
 
-### 逐行說明
+## 逐行說明
 ---
 在第一行會看到以下內容：
 ```solidity
@@ -45,4 +43,67 @@ contract [合約名稱] {
     // 內容
 }
 ```
+
+這裡類似其他程式語言中的 `class` 宣告，因此有程式語言概念的話，大可以把 `contract` 想成一個 class，裡面會有各種方法可供呼叫或做其他處理。
+
+一個 `sol` 檔中可以有多個 contract 宣告，也可以在不同的 `sol` 檔宣告不同的 contract ，並透過 `import` 將該 contract 引入使用。
+
+但以初學的角度來看，目前就只會有一個 sol 檔放置一個合約內容。
+
+---
+以下先列出目前這份合約所擁有的方法及屬性：
+
+屬性：
+
+```solidity
+// 建立一組名稱為 messages ，以位址（`address`）為 key 的 map
+// 其中的 `mapping`、`address` 及 `string` 都是 Solidity 的資料類型
+// 此變數在此合約內有效，且無法直接被碰觸到
+mapping(address => string) private messages
+```
+
+```solidity
+// 用於存放要求者的 address 資訊，例如 0x........
+address private requester
+```
+
+方法：
+```solidity
+// 建構子，會在合約開始時就執行
+// 括號後面加上的 payable ，是為了存取此次要求執行合約者的資訊
+// 如果不加的話將會無法存取到該資訊。
+// 這裡面只將存取此份合約者的錢包位址存放在 requester 這個屬性成員之中。
+constructor() payable
+```
+
+```solidity
+// 定義這份合約收取費用的方法，
+// 如果沒實作內容的話基本上就只是把存取這份合約者送來的錢加到這份合約的錢包內。
+// 通常會在這裡定義收到錢後，要做些什麼事。
+receive() external payable
+```
+
+```solidity
+// 定義當 receive 時執行失敗時所需要做的事情
+// 基本上當 receive 失敗後，全部狀態都會被復原。
+fallback() external payable
+```
+
+```solidity
+function AddContent(string memory content) public payable
+```
+
+```solidity
+function GetSenderContent(address addr) public view returns (string memory)
+```
+
+```solidity
+function GetMyContent() public view returns (string memory)
+```
+
+## 部署及測試
+
+## 成果
+* 合約位址：[0x3Ac20ec16E74B19989fB9dCa4cd8f98B5C4c0bDD](https://goerli.etherscan.io/address/0x3ac20ec16e74b19989fb9dca4cd8f98b5c4c0bdd#code)
+* 測試時使用的錢包位址：[0x6e18EC2321bc0CF77949C89475EA22ECE63567c8](https://goerli.etherscan.io/address/0x6e18EC2321bc0CF77949C89475EA22ECE63567c8)
 

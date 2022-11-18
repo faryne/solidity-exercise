@@ -85,23 +85,56 @@ receive() external payable
 
 ```solidity
 // 定義當 receive 時執行失敗時所需要做的事情
-// 基本上當 receive 失敗後，全部狀態都會被復原。
+// 基本上當 receive 失敗後，全部狀態都會被復原。除非有額外需求才要實作其內容
 fallback() external payable
 ```
 
 ```solidity
+// 將傳入的字串內容放進前面宣告的 messages 內
+// 這裡使用 memory 存放，可以減少 Gas Fee 的花費
 function AddContent(string memory content) public payable
 ```
 
 ```solidity
+// 傳入 address 位址後，從 messages 內該 address 內存放的文字
 function GetSenderContent(address addr) public view returns (string memory)
 ```
 
 ```solidity
+// 傳出要求合約執行者所存放的文字
 function GetMyContent() public view returns (string memory)
 ```
 
 ## 部署及測試
+* 打開 Remix 在首頁點擊 `New File`，左手邊的檔案列表中會提示輸入檔名。檔名輸入完後，就會開啟編輯畫面。
+
+* 將這個 repository 中的 `main.sol` 檔貼到編輯畫面中。
+
+* 點擊畫面左手邊工具列中的 `Solidity compiler`，再點擊裡面的 `Compile main.sol` 按鍵開始編譯。若是發生錯誤，其下方會出現相關錯誤訊息可供參考除錯用。
+
+| ![alt "圖一"](./images/img5.png) |
+|:--:|
+| 圖一 |
+
+* 如果編譯沒有問題的話，可以點擊畫面左手邊工具列中的 `Deploy & run transactions`，將該合約部署上測試鏈。
+
+| ![alt "圖二"](./images/img4.png) |
+|:--:|
+| 圖二 |
+
+>  `Environment` 可以選擇 `Remix VM` ，每天都會有 100 個 ETH 可以供測試部署使用。這 100 個 ETH 除了拿來測試部署外，也能作為呼叫合約的費用。當然也可以選擇連結自己的 MetaMask 錢包，那麼該次部署費用就是直接從錢包扣。在實驗過程中我最高被扣了 0.08 個 GoerliETH！
+
+> 在部署時如果 `Value` 填入大於 0 的值時，部署時會一併轉入 `Value` 單位的錢進去，以上圖為例，這會先轉入 10ETH 到該合約內。 
+
+* 部署成功後，下方的 `Deployed Contracts`，並且出現可供呼叫的方法。
+
+| ![alt "圖三"](./images/img3.png) |
+|:--:|
+| 圖三 |
+
+> 到此步驟時可以在圖二中的 Value 填入要發出去的錢數值，然後按下圖三中的 `Transact` 執行交易。成功的話，`Balance` 的值即會增加。
+
+> 也可以在上面各方法的輸入框輸入相應的參數後，並重複上述步驟，即會執行該方法。
 
 ## 成果
 * 合約位址：[0x3Ac20ec16E74B19989fB9dCa4cd8f98B5C4c0bDD](https://goerli.etherscan.io/address/0x3ac20ec16e74b19989fb9dca4cd8f98b5c4c0bdd#code)

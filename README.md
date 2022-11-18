@@ -32,7 +32,7 @@ pragma solidity ^0.8.17;
 第三個關鍵字中的 `^0.8.17` ，代表要使用 `0.8.17` 以上版本，其中的 `^` 代表的就是以上。因此只要出了更新的版本，例如 `0.8.18`，在編譯發佈時則會引用 `0.8.18` 版本處理。但這麼寫可能會有意料外的風險，需要注意。
 
 
-若是要固定在某個版本，則可以寫成像是 `0.8.17` 這樣，無論如何就會引用 `0.8.17` 處理。
+若是要固定在某個版本，則可以寫成像是 `0.8.17` 這樣，無論如何就只會引用 `0.8.17` 處理。
 
 關於 Solidity 版本號列表，可以在[此頁](https://github.com/ethereum/solc-bin/blob/gh-pages/bin/list.txt)找到。
 
@@ -96,7 +96,7 @@ function AddContent(string memory content) public payable
 ```
 
 ```solidity
-// 傳入 address 位址後，從 messages 內該 address 內存放的文字
+// 傳入 address 位址後，從 messages 內取出該 address 內存放的文字內容
 function GetSenderContent(address addr) public view returns (string memory)
 ```
 
@@ -134,7 +134,7 @@ function GetMyContent() public view returns (string memory)
 
 > 到此步驟時可以在圖二中的 Value 填入要發出去的錢數值，然後按下圖三中的 `Transact` 執行交易。成功的話，`Balance` 的值即會增加。
 
-> 也可以在上面各方法的輸入框輸入相應的參數後，並重複上述步驟，即會執行該方法。
+> 也可以在上面各方法的輸入框輸入相應的參數後，並重複上述步驟，即會執行該方法，並觀察到 `Balance` 的增加。
 
 ## 成果
 * 合約位址：[0x3Ac20ec16E74B19989fB9dCa4cd8f98B5C4c0bDD](https://goerli.etherscan.io/address/0x3ac20ec16e74b19989fb9dca4cd8f98b5c4c0bdd#code)
